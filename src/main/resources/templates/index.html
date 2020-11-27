@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/webjars/element-ui/2.13.0/lib/theme-chalk/index.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet"></link>
+    <script src="/webjars/vue/2.6.11/dist/vue.min.js"></script>
+    <script src="/js/http-vue-loader.js"></script>
+<!--    <script src="https://unpkg.com/http-vue-loader"></script>-->
+    <script src="/webjars/vue-router/2.8.1/dist/vue-router.min.js"></script>
+    <!-- <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> -->
+    <script src="/webjars/axios/0.19.2/dist/axios.min.js"></script>
+    <script src="/webjars/element-ui/2.13.0/lib/index.js"></script>
+    <script src="/webjars/element-ui/2.13.0/lib/umd/locale/zh-CN.js"></script>
+    <script src="/webjars/element-ui/2.13.0/lib/umd/locale/en.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/router.js"></script>
+
+</head>
+<body>
+<!--主页-->
+<div th:if="${isLogin}" id="app">
+    <div th:insert="main"></div>
+</div>
+
+<!--登录页面-->
+<div th:unless="${isLogin}" id="login">
+    <div th:insert="login"></div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: pundix-currency-admin
+  profiles:
+    active: dev
+  messages:
+    basename: i18n/messages
+  thymeleaf:
+    cache: false
+server:
+  port: 8081
+logging:
+  pattern:
+    console: "%date{yy-MM-dd HH:mm:ss.SSS} %5p ${PID:-} --- [%15.15t] %-40.40logger{39}[%4line]: %msg%n"
+
