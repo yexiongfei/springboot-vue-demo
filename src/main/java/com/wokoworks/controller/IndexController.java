@@ -1,13 +1,10 @@
 package com.wokoworks.controller;
 
 import com.wokoworks.base.Consts;
-import com.wokoworks.interceptor.LoginInterceptor;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
