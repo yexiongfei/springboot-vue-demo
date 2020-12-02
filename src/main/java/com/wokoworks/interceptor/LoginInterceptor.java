@@ -25,7 +25,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String cookieValue = getCookieValue(request, Consts.TOKEN);
+        String cookieValue = request.getHeader(Consts.TOKEN);
         /**
          * 找不到登录token,未登录
          */
@@ -55,14 +55,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
-    public static String getCookieValue(HttpServletRequest request, String key) {
-        Cookie cookie = WebUtils.getCookie(request, key);
-        if (cookie == null || Strings.isEmpty(cookie.getValue())) {
-            return null;
-        }
-        return cookie.getValue();
-    }
-
+  
 
 
 
