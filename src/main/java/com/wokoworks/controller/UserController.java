@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,9 +26,9 @@ public class UserController {
         String username = loginParams.getUsername();
         String password = loginParams.getPassword();
         if (username.equals("root") && password.equals("123456")) {
-            int userId = 1;
-            request.getSession().setAttribute(Consts.TOKEN, userId);
-            return Resp.ok(null);
+            String token = UUID.randomUUID().toString();
+            Consts.LOGIN_SESSION.put(token, 1);
+            return Resp.ok(token);
         }
         return Resp.reject("账户或者密码错误");
     }

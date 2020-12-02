@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/webjars/element-ui/2.13.0/lib/theme-chalk/index.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet"></link>
+    <script src="/webjars/vue/2.6.11/dist/vue.min.js"></script>
+    <script src="/js/http-vue-loader.js"></script>
+<!--    <script src="https://unpkg.com/http-vue-loader"></script>-->
+    <script src="/webjars/vue-router/2.8.1/dist/vue-router.min.js"></script>
+    <!-- <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> -->
+    <script src="/webjars/axios/0.19.2/dist/axios.min.js"></script>
+    <script src="/webjars/element-ui/2.13.0/lib/index.js"></script>
+    <script src="/webjars/element-ui/2.13.0/lib/umd/locale/zh-CN.js"></script>
+    <script src="/webjars/element-ui/2.13.0/lib/umd/locale/en.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/router.js"></script>
+  
+
+</head>
+<body>
+    <div id="app">
+        <!--主页-->
+        <template  v-if = "isLogin">
+            <el-container>
+                <el-header>Header</el-header>
+                <el-container>
+                <el-aside width="200px">
+                        <router-link to="/component1">component1</router-link>
+                        <br>
+                        <router-link to="/component2">component2</router-link>
+                </el-aside>
+                <el-container>
+                    <el-main>
+                        <router-view></router-view>
+                    </el-main>
+                </el-container>
+                </el-container>
+            </el-container>
+        </template> 
+       
+        <!-- 登录 -->
+        <template v-else>
+            <el-form :model="form" >
+                <el-form-item label="账号" prop="username">
+                    <el-input v-model="form.username"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="password">
+                    <el-input v-model="form.password"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="login">登录</el-button>
+                </el-form-item>
+            </el-form>
+        </template>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        router,
+        data: {
+            isLogin: false,
+            form:{
+               username: '',
+               password: ''
+            }
+        },
+        methods: {
+            login() {
+                post(this, '/api/user/login', this.form, function(data) {
+                    if(data.code === 200) {
+                        localStorage.setItem('loginToken', data.data)
+                        window.location.reload()
+                    } else{
+                        this.$message.error(data.msg)
+                    }
+                })
+            },
+            checkLogin() {
+                let token = localStorage.getItem('loginToken')
+                console.log(token)
+                if (token !== null && token !== '') {
+                    this.isLogin = true
+                }
+            }
+        },
+        created() {
+            this.checkLogin()
+            
+            console.log(window.location)
+        }
+    })
+</script>
+
+</html>
